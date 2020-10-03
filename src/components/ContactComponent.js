@@ -3,6 +3,7 @@ import { Breadcrumb, BreadcrumbItem, Button, Label, Col, Row } from 'reactstrap'
 import { Control, Form, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 
+
 const required = val => val && val.length;
 const maxLength = len => val => !val || (val.length <= len);
 const minLength = len => val => val && (val.length >= len);
@@ -12,29 +13,13 @@ const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 class Contact extends Component {
     constructor(props){
             super(props);
-            this.state = {
-                firstName: '',
-                lastName: '',
-                phoneNum: '',
-                email: '',
-                agree: false,
-                contactType: 'By Phone',
-                feedback: '',
-                touched: {
-                    firstName: false,
-                    lastName: false,
-                    phoneNum: false,
-                    email: false
-                }
-            };
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit(values) {
-        console.log('Current State is: ' + JSON.stringify(values));
-        alert('Current State is: ' + JSON.stringify(values));
         this.props.resetFeedbackForm();
+        this.props.postFeedback(values);
     }
 
     render(){ 
